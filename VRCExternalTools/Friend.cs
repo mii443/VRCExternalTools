@@ -8,12 +8,13 @@ namespace VRCExternalTools
 {
     class Friend
     {
-        public String id { get; set; }
+        public string id { get; set; }
 
-        public Friend(String userId)
+        public Friend(string userId)
         {
             id = userId;
         }
     }
 }
 
+ 

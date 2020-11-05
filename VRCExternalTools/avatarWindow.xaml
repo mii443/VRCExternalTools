@@ -1,0 +1,36 @@
+﻿<Window x:Class="VRCExternalTools.avatarWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VRCExternalTools"
+        mc:Ignorable="d"
+        Title="AVATAR" Height="370" Width="400">
+    <Grid>
+        <TabControl>
+            <TabItem Header="全般">
+                <Grid Background="#FFE5E5E5">
+                    <Label Content="id:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    <Label Content="name:" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top"/>
+                    <Label Content="description:" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
+                    <Label Content="version:" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top"/>
+                    <Label Content="featured:" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top"/>
+                    <Label Content="created__at:" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top"/>
+                    <Label Content="updated__at:" HorizontalAlignment="Left" Margin="10,166,0,0" VerticalAlignment="Top"/>
+                    <Label Content="releaseStatus:" HorizontalAlignment="Left" Margin="10,192,0,0" VerticalAlignment="Top"/>
+                    <Label Content="platform:" HorizontalAlignment="Left" Margin="9,218,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="idLabel" Content="Label" HorizontalAlignment="Left" Margin="97,10,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="nameLabel" Content="Label" HorizontalAlignment="Left" Margin="97,36,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="descriptionLabel" Content="Label" HorizontalAlignment="Left" Margin="97,62,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="versionLabel" Content="Label" HorizontalAlignment="Left" Margin="97,88,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="featuredLabel" Content="Label" HorizontalAlignment="Left" Margin="97,114,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="created_atLabel" Content="Label" HorizontalAlignment="Left" Margin="97,140,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="updated_atLabel" Content="Label" HorizontalAlignment="Left" Margin="97,166,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="releaseStatusLabel" Content="Label" HorizontalAlignment="Left" Margin="97,192,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="platformLabel" Content="Label" HorizontalAlignment="Left" Margin="97,218,0,0" VerticalAlignment="Top"/>
+                    <Button x:Name="downloadPackageButton" Content="download package" HorizontalAlignment="Left" Margin="10,249,0,0" VerticalAlignment="Top" Width="125" Click="downloadPackageButton_Click"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

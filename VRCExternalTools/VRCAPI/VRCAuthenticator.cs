@@ -14,19 +14,19 @@ namespace VRCExternalTools.VRCAPI
 {
     class VRCAuthenticator
     {
-        private String userName;
-        private String password;
-        private String apiKey;
-        private String authToken;
+        private string userName;
+        private string password;
+        private string apiKey;
+        private string authToken;
         private bool twoFactor = false;
 
-        public VRCAuthenticator(String name, String pass)
+        public VRCAuthenticator(string name, string pass)
         {
             userName = name;
             password = pass;
         }
 
-        public async Task<String> getApiKey()
+        public async Task<string> getApiKey()
         {
             Uri uri = new Uri(VRCAPIBase.api_base + "/config");
             using (var client = new HttpClient())
@@ -37,7 +37,7 @@ namespace VRCExternalTools.VRCAPI
             }
         }
 
-        public string getAuthToken(String name, String pass)
+        public string getAuthToken(string name, string pass)
         {
             var cookieContainer = new CookieContainer();
 
@@ -69,14 +69,14 @@ namespace VRCExternalTools.VRCAPI
                 }
             }
 
-            return String.Empty;
+            return string.Empty;
         }
 
         public async Task<VRCAPI> loginAsync()
         { 
             apiKey = await getApiKey();
             authToken = getAuthToken(userName, password);
-            if (authToken == String.Empty)
+            if (authToken == string.Empty)
             {
                 return null;
             }

@@ -30,7 +30,7 @@ namespace VRCExternalTools
         {
             InitializeComponent();
             friends.ItemsSource = friendsCollection;
-            avatars.ItemsSource = avatarsCollection;
+            avatarsListView.ItemsSource = avatarsCollection;
             BindingOperations.EnableCollectionSynchronization(this.friendsCollection, new object());
             BindingOperations.EnableCollectionSynchronization(this.avatarsCollection, new object());
         }
@@ -51,22 +51,20 @@ namespace VRCExternalTools
                     loginButton.IsEnabled = false;
                     var userConfig = api.getUserConfig();
                     Name.Content = userConfig.username;
-
-                    var avatars = api.searchAvatars(user: "me", releaseStatus: "all");
-                    foreach (var avatar in avatars)
-                    {
-                        avatarsCollection.Add(avatar);
-                    }
                 }
                 else
                 {
                     MessageBox.Show("2FA Failed.");
+                    return;
                 }
             }
             else if (api == null)
             {
                 MessageBox.Show("Invalid Username or Password");
+                return;
             }
+
+            MessageBox.Show("Logined.");
         }
 
         private void reloadFriends_Click(object sender, RoutedEventArgs e)
@@ -80,6 +78,22 @@ namespace VRCExternalTools
                     friendsCollection.Add(friend);
                 }
             }
+        }
+
+        private void reloadAvatarsButton_Click(object sender, RoutedEventArgs e)
+        {
+            var avatars = api.searchAvatars(user: "me", releaseStatus: "all");
+            foreach (var avatar in avatars)
+            {
+                avatarsCollection.Add(avatar);
+            }
+        }
+
+        private void AvatarsListView_OnPreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var avatar = (VRCAPIBase.AvatarObject) avatarsListView.SelectedItems[0];
+            var window = new avatarWindow(api, avatar);
+            window.Show();
         }
     }
 }

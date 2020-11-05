@@ -11,12 +11,12 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace VRCExternalTools.VRCAPI
 {
-    class VRCAPI
+    public class VRCAPI
     {
-        public String apiKey;
-        public String authToken;
+        public string apiKey;
+        public string authToken;
         private HttpClientHandler handler = new HttpClientHandler();
-        public VRCAPI(String key, String token)
+        public VRCAPI(string key, string token)
         {
             apiKey = key;
             authToken = token;
@@ -35,7 +35,20 @@ namespace VRCExternalTools.VRCAPI
             }
         }
 
-        public List<VRCAPIBase.AvatarObject> searchAvatars(String user = null, bool featured = false, String userId = null, int n = -1, int offset = -1, string order = null, string releaseStatus = null, string sort = null, string maxUnityVersion = null, string minUnityVersion = null, string maxAssetVersion = null, string minAssetVersion = null, string platform = null)
+        public VRCAPIBase.AvatarObject getAvatarById(string id)
+        {
+            StringBuilder urlParams = new StringBuilder("?");
+            urlParams.Append("apiKey=" + apiKey);
+            Uri uri = new Uri(VRCAPIBase.api_base + "/avatars/" + id + urlParams);
+            using (var client = new HttpClient(handler, false))
+            {
+                var request = new HttpRequestMessage(HttpMethod.Get, uri);
+                var result = client.SendAsync(request).Result.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<VRCAPIBase.AvatarObject>(result);
+            }
+        }
+
+        public List<VRCAPIBase.AvatarObject> searchAvatars(string user = null, bool featured = false, string userId = null, int n = -1, int offset = -1, string order = null, string releaseStatus = null, string sort = null, string maxUnityVersion = null, string minUnityVersion = null, string maxAssetVersion = null, string minAssetVersion = null, string platform = null)
         {
             string urlParams = "?";
             if (user != null) { urlParams += "user=" + user + "&"; }
@@ -71,7 +84,6 @@ namespace VRCExternalTools.VRCAPI
                 //request.Content = new StringContent(JsonSerializer.Serialize(new VRCAPIBase.FriendsRequest() { apiKey = apiKey, n = n, offline = offline, offset = offset }), Encoding.UTF8, "application/json");
                 var request = new HttpRequestMessage(HttpMethod.Get, uri);
                 var result = client.SendAsync(request).Result.Content.ReadAsStringAsync().Result;
-                MessageBox.Show(result);
                 return JsonConvert.DeserializeObject<List<VRCAPIBase.LimitedUserObject>>(result);
             }
         }
